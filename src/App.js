@@ -5,6 +5,7 @@ import Login from './features/login/Login';
 import Signup from './features/signup/Signup';
 import Profile from './features/profile/Profile';
 import Products from './features/products/Products';
+import Users from './features/users/Users';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path='/sign-up' element={<Signup />}></Route>
         <Route path='/profile' element={<Profile />}></Route>
         <Route path='/products' element={<Products />}></Route>
+        <Route path='/users' element={<Users />}></Route>
       </Routes>
     </div>
   );
