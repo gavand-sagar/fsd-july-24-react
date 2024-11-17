@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { getToken } from '../../common/utils/utils';
 import { useForm } from 'react-hook-form';
 import { axiosInstance } from '../../common/utils/axiosService';
-
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const NoteSkeleton = () => <Box margin={1} width={'300px'}>
     <Paper elevation={5}>
@@ -21,6 +21,7 @@ export default function Notes() {
     const [notes, setNotes] = useState([]);
     const [getApiLoading, setGetApiLoading] = useState(false);
     const [createApiLoading, setCreateApiLoading] = useState(false);
+    const [deleteApiLoading, setDeleteApiLoading] = useState('');
     const { register, formState: { errors }, handleSubmit } = useForm()
 
     useEffect(() => {
@@ -50,6 +51,20 @@ export default function Notes() {
             })
             .finally(() => {
                 setCreateApiLoading(false)
+            })
+    }
+
+    function handleDelete(id) {
+        setDeleteApiLoading(id)
+        axiosInstance.delete("/delete-note/" + id)
+            .then(resposne => {
+                setNotes(notes.filter(x => x._id != id));
+            })
+            .catch(error => {
+                alert(error.message)
+            })
+            .finally(() => {
+                setDeleteApiLoading('')
             })
     }
 
@@ -86,8 +101,11 @@ export default function Notes() {
                     notes.map(x =>
                         <Box margin={1}>
                             <Paper elevation={5}>
-                                <Box padding={2} display={'flex'} justifyContent={'start'} alignItems={'center'} gap={1}>
+                                <Box padding={2} display={'flex'} justifyContent={'space-between'} alignItems={'center'} gap={1}>
                                     <Typography variant='caption'>{x.noteText}</Typography>
+                                    {
+                                        deleteApiLoading == x._id ? <></> : <DeleteIcon onClick={() => handleDelete(x._id)} />
+                                    }
                                 </Box>
                             </Paper>
                         </Box>
