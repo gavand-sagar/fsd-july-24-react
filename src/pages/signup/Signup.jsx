@@ -12,7 +12,7 @@ export default function Signup() {
     function mySubmit(formData) {
         //api call
         setApiLoading(true)
-        axios.post("https://fsd-july-24-react.onrender.com/signup-user", formData)
+        axios.post("https://fsd-july-2024-backend.onrender.com/signup-user", formData)
             .then(response => {
                 if (response) {
                     alert("User Created Successfuly.")
