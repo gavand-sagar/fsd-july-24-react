@@ -28,7 +28,7 @@ export default function Login() {
                     sessionStorage.setItem("token", response.data.token) // will be deleted automatically from broswer after you close the tab
                 }
                 createAxiosInstance();
-                navigate("/products")
+                navigate("/notes")
             } else {
                 alert("Not a valid User")
             }
@@ -42,7 +42,7 @@ export default function Login() {
     return (
         <div className='login-page'>
             <Box padding={2} className='login-form'>
-                <Typography variant='h4'>Welcome to My App</Typography>
+                <Typography variant='h4'>Welcome to My Notes</Typography>
                 <Box padding={2}>
                     <TextField disabled={apiLoading} label={"Username"} type='text'
                         error={errors?.username}
