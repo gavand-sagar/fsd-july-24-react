@@ -1,15 +1,21 @@
+import { jwtDecode } from "jwt-decode";
 import React, { useEffect, useState } from 'react'
 import { clearTokens, getToken } from '../utils/utils'
 import { Link, useNavigate } from 'react-router-dom';
-import { Avatar, Box, Button, Popover, Typography } from '@mui/material';
-// import LogoutIcon from '@mui/icons-material/Logout';
+import { Avatar, Box, Button, Paper, Popover, Typography } from '@mui/material';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export default function PrivateRoute({ component }) {
     const [isVisible, setIsVisible] = useState(false);
+    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
     const navigate = useNavigate()
     useEffect(() => {
         const token = getToken();
         if (token) {
+            const decodedTokenObj = jwtDecode(token);
+            setUsername(decodedTokenObj.username)
+            setEmail(decodedTokenObj.email)
             setIsVisible(true);
         } else {
             navigate('/login')
@@ -44,7 +50,9 @@ export default function PrivateRoute({ component }) {
                 <Link to={"/notes"}>Notes</Link>
                 <div>
                     <Avatar aria-describedby={id} variant="contained" onClick={handleClick}>
-                        U
+                        {
+                            username?.charAt(0)
+                        }
                     </Avatar>
                     <Popover
                         id={id}
@@ -56,7 +64,13 @@ export default function PrivateRoute({ component }) {
                             horizontal: 'left',
                         }}
                     >
-                        <Typography onClick={logout} sx={{ p: 2 }}> Logout</Typography>
+                        <Paper elevation={2} sx={{ width: '150px', padding: 2 }}>
+                            <Typography variant="h6">{username}</Typography>
+                            <Typography variant="body1" marginTop={1}>{email}</Typography>
+                            <Typography onClick={logout} marginTop={1}>
+                                <LogoutIcon titleAccess="Logout" />
+                            </Typography>
+                        </Paper>
                     </Popover>
                 </div>
 
