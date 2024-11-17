@@ -7,7 +7,7 @@ export default function NotFound() {
         <>
             <Typography variant='h1'>Page Not Found</Typography>
 
-            Go to Login <Link to={'/login'}>Click Here</Link>
+            Go to Login <Link to={'/login'}>Click Here...</Link>
 
         </>
     )
