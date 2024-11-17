@@ -23,7 +23,7 @@ export default function Users() {
 
     useEffect(() => {
         setApiLoading(true);
-        axios.get("http://localhost:3001/get-users-list")
+        axios.get("https://fsd-july-24-react.onrender.com/get-users-list")
             .then(resposne => {
                 //
                 setUsersList(resposne.data)

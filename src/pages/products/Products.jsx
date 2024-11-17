@@ -10,7 +10,7 @@ export default function Products() {
     useEffect(() => {
         //api call on page load
         setApiLoading(true)
-        axios.get("http://localhost:3001/get-all-categories",
+        axios.get("https://fsd-july-24-react.onrender.com/get-all-categories",
             {
                 headers: {
                     token: getToken()

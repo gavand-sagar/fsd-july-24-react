@@ -24,7 +24,7 @@ export default function Notes() {
 
     useEffect(() => {
         setGetApiLoading(true);
-        axios.get("http://localhost:3001/get-notes-list", {
+        axios.get("https://fsd-july-24-react.onrender.com/get-notes-list", {
             headers: {
                 token: getToken()
             }
@@ -43,7 +43,7 @@ export default function Notes() {
 
     function mySubmit(formdata) {
         setCreateApiLoading(true)
-        axios.post("http://localhost:3001/create-note",
+        axios.post("https://fsd-july-24-react.onrender.com/create-note",
             formdata
             , {
                 headers: {
