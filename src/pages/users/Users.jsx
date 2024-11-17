@@ -2,6 +2,7 @@ import { Avatar, Box, Paper, Skeleton, Typography } from '@mui/material';
 import { deepOrange } from '@mui/material/colors';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { axiosInstance } from '../../common/utils/axiosService';
 
 const UserSkeleton = () => <Box margin={1} width={'300px'}>
     <Paper elevation={5}>
@@ -23,7 +24,7 @@ export default function Users() {
 
     useEffect(() => {
         setApiLoading(true);
-        axios.get(process.env.REACT_APP_API_URL + "/get-users-list")
+        axiosInstance.get("/get-users-list")
             .then(resposne => {
                 //
                 setUsersList(resposne.data)

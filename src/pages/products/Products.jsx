@@ -1,7 +1,6 @@
 import { Box, Chip, Skeleton, Typography } from '@mui/material'
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { getToken } from '../../common/utils/utils';
+import { axiosInstance } from '../../common/utils/axiosService';
 
 export default function Products() {
     const [categories, setCategories] = useState([]);
@@ -10,12 +9,7 @@ export default function Products() {
     useEffect(() => {
         //api call on page load
         setApiLoading(true)
-        axios.get(process.env.REACT_APP_API_URL + "/get-all-categories",
-            {
-                headers: {
-                    token: getToken()
-                }
-            })
+        axiosInstance.get("/get-all-categories")
             .then(response => {
                 setCategories(response.data)
             })

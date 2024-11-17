@@ -3,6 +3,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
+import { axiosInstance } from '../../common/utils/axiosService'
 
 export default function Signup() {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -12,7 +13,7 @@ export default function Signup() {
     function mySubmit(formData) {
         //api call
         setApiLoading(true)
-        axios.post(process.env.REACT_APP_API_URL + "/signup-user", formData)
+        axiosInstance.post("/signup-user", formData)
             .then(response => {
                 if (response) {
                     alert("User Created Successfuly.")

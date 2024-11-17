@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { getToken } from '../../common/utils/utils';
 import { useForm } from 'react-hook-form';
+import { axiosInstance } from '../../common/utils/axiosService';
 
 
 const NoteSkeleton = () => <Box margin={1} width={'300px'}>
@@ -43,15 +44,10 @@ export default function Notes() {
 
     function mySubmit(formdata) {
         setCreateApiLoading(true)
-        axios.post(process.env.REACT_APP_API_URL + "/create-note",
-            formdata
-            , {
-                headers: {
-                    token: getToken()
-                }
-            })
+        axiosInstance.post("/create-note",
+            formdata)
             .then(resposne => {
-                setNotes([...notes,formdata]);
+                setNotes([...notes, formdata]);
             })
             .catch(error => {
                 alert(error.message)

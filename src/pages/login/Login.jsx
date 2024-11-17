@@ -3,6 +3,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
+import { axiosInstance } from '../../common/utils/axiosService'
 
 export default function Login() {
 
@@ -13,7 +14,7 @@ export default function Login() {
     function mySubmit(formData) {
         //to call generate-token api
         setApiLoading(true)
-        axios.get(process.env.REACT_APP_API_URL + "/generate-token", {
+        axiosInstance.get("/generate-token", {
             headers: {
                 myusername: formData.username,
                 mypassword: formData.password
@@ -21,10 +22,10 @@ export default function Login() {
         }).then(response => {
             // when we receive response
             if (response.data && response.data.token) {
-                if(formData.rememberMe){
-                    localStorage.setItem("token",response.data.token) // persisted even after we close browser
-                }else{
-                    sessionStorage.setItem("token",response.data.token) // will be deleted automatically from broswer after you close the tab
+                if (formData.rememberMe) {
+                    localStorage.setItem("token", response.data.token) // persisted even after we close browser
+                } else {
+                    sessionStorage.setItem("token", response.data.token) // will be deleted automatically from broswer after you close the tab
                 }
                 navigate("/products")
             } else {
