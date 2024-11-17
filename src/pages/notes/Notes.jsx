@@ -57,6 +57,7 @@ export default function Notes() {
         <Box padding={2}>
             <Typography variant='h3'>My Notes</Typography>
             <TextField
+                disabled={createApiLoading}
                 error={errors?.noteText}
                 helperText={errors?.noteText?.message}
                 {...register('noteText', {
@@ -73,7 +74,7 @@ export default function Notes() {
                         message: 'Maximum 500 letters'
                     }
                 })} />
-            <Button onClick={handleSubmit(mySubmit)} variant='contained'>Add Note</Button>
+            <Button disabled={createApiLoading} onClick={handleSubmit(mySubmit)} variant='contained'>Add Note</Button>
             {
                 getApiLoading ? <>
                     <NoteSkeleton />
