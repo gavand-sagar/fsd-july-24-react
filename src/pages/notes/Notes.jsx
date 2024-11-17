@@ -25,11 +25,7 @@ export default function Notes() {
 
     useEffect(() => {
         setGetApiLoading(true);
-        axios.get("https://fsd-july-2024-backend.onrender.com/get-notes-list", {
-            headers: {
-                token: getToken()
-            }
-        })
+        axiosInstance.get("/get-notes-list")
             .then(resposne => {
                 setNotes(resposne.data);
             })

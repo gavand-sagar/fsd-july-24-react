@@ -3,7 +3,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
-import { axiosInstance } from '../../common/utils/axiosService'
+import { axiosInstance, createAxiosInstance } from '../../common/utils/axiosService'
 
 export default function Login() {
 
@@ -27,6 +27,7 @@ export default function Login() {
                 } else {
                     sessionStorage.setItem("token", response.data.token) // will be deleted automatically from broswer after you close the tab
                 }
+                createAxiosInstance();
                 navigate("/products")
             } else {
                 alert("Not a valid User")
