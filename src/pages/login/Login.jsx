@@ -13,7 +13,7 @@ export default function Login() {
     function mySubmit(formData) {
         //to call generate-token api
         setApiLoading(true)
-        axios.get("https://fsd-july-2024-backend.onrender.com/generate-token", {
+        axios.get(process.env.REACT_APP_API_URL + "/generate-token", {
             headers: {
                 myusername: formData.username,
                 mypassword: formData.password

@@ -43,7 +43,7 @@ export default function Notes() {
 
     function mySubmit(formdata) {
         setCreateApiLoading(true)
-        axios.post("https://fsd-july-2024-backend.onrender.com/create-note",
+        axios.post(process.env.REACT_APP_API_URL + "/create-note",
             formdata
             , {
                 headers: {
